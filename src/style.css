@@ -14,13 +14,20 @@ main {
   flex-direction: column;
 }
 
+ul {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}
+
 ul li {
   display: inline;
   list-style: none;
 }
 
-#task-input {
-  width: 55vw;
+.check-box,
+ul li {
+  margin-right: 1em;
 }
 
 .todo-head {
@@ -31,4 +38,8 @@ ul li {
 
 .clear {
   color: rgb(109, 99, 99);
+}
+
+#task-input {
+  width: 55vw;
 }
