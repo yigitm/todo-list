@@ -25,6 +25,13 @@ ul li {
   list-style: none;
 }
 
+span {
+  position: relative;
+  z-index: 2;
+  top: 0.1em;
+  right: 1.4em;
+}
+
 .check-box,
 ul li {
   margin-right: 1em;
