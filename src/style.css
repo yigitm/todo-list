@@ -2,5 +2,33 @@ body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  background-color: rgb(194, 150, 235);
+}
+
+main,
+.todo-head {
+  display: flex;
+  align-items: center;
+}
+
+main {
+  flex-direction: column;
+}
+
+ul li {
+  display: inline;
+  list-style: none;
+}
+
+#task-input {
+  width: 55vw;
+}
+
+.todo-head {
+  width: 100%;
+  justify-content: space-around;
+  flex-direction: row;
+}
+
+.clear {
+  color: rgb(109, 99, 99);
 }
