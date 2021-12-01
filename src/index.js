@@ -1,6 +1,8 @@
 /* eslint-disable no-unused-vars */
 import _ from 'lodash';
 import './style.css';
+import Status from './modules/status';
+import UI from './modules/ui';
 
 const ulElement = document.getElementsByTagName('ul')[0];
 const tasks = [
@@ -34,9 +36,18 @@ const tasks = [
 const createTask = () => {
   for (let i = 0; i < tasks.length; i += 1) {
     const liElement = document.createElement('li');
-    liElement.innerHTML = `<input class="check-box" type="checkbox" name="" id="" /><li>${tasks[i].description}: ${tasks[i].index}</li><i class="fas fa-ellipsis-v fa-1x"></i>`;
+    liElement.innerHTML = `<input class="check-box" type="checkbox" name="checkbox" id="${tasks[i].index}"/><span>${tasks[i].description}: ${tasks[i].index}</span><i class="fas fa-ellipsis-v fa-1x"></i>`;
     ulElement.appendChild(liElement);
   }
 };
 
-document.addEventListener('DOMContentLoaded', () => createTask());
+document.addEventListener('DOMContentLoaded', () => {
+  createTask();
+  const checkbox = document.querySelectorAll('.check-box');
+  checkbox.forEach((element) => {
+    element.addEventListener('change', (e) => {
+      Status.updateStatus(e.target, tasks);
+      UI.updateStatus(e.target);
+    });
+  });
+});
