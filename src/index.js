@@ -5,36 +5,36 @@ import './style.css';
 const ulElement = document.getElementsByTagName('ul')[0];
 const tasks = [
   {
-    description: `Task`,
+    description: 'Task',
     completed: false,
     index: 0,
   },
   {
-    description: `Task`,
+    description: 'Task',
     completed: false,
     index: 1,
   },
   {
-    description: `Task`,
+    description: 'Task',
     completed: false,
     index: 2,
   },
   {
-    description: `Task`,
+    description: 'Task',
     completed: false,
     index: 3,
   },
   {
-    description: `Task`,
+    description: 'Task',
     completed: false,
     index: 4,
   },
 ];
 
 const createTask = () => {
-  for (const task of tasks) {
+  for (let i = 0; i < tasks.length; i += 1) {
     const liElement = document.createElement('li');
-    liElement.innerHTML = `<input class="check-box" type="checkbox" name="" id="" /><li>${task.description}: ${task.index}</li><i class="fas fa-ellipsis-v fa-1x"></i>`;
+    liElement.innerHTML = `<input class="check-box" type="checkbox" name="" id="" /><li>${tasks[i].description}: ${tasks[i].index}</li><i class="fas fa-ellipsis-v fa-1x"></i>`;
     ulElement.appendChild(liElement);
   }
 };
