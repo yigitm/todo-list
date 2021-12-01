@@ -10,6 +10,15 @@ const UI = (() => {
       return true;
     }
   };
-  return { updateStatus };
+
+  const checkStatus = (tasks, checkbox) => {
+    tasks.forEach((element) => {
+      if (element.completed == true) {
+        checkbox[element.index].nextElementSibling.style.textDecoration =
+          'line-through';
+      }
+    });
+  };
+  return { updateStatus, checkStatus };
 })();
 export default UI;

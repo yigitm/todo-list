@@ -1,5 +1,3 @@
-/* eslint-disable no-unused-vars */
-import _ from 'lodash';
 import './style.css';
 import Status from './modules/status';
 import UI from './modules/ui';
@@ -40,7 +38,6 @@ if (localStorage.length === 0) {
 }
 
 const createTask = () => {
-  //tasks = Storage.setLocal();
   for (let i = 0; i < tasks.length; i += 1) {
     const liElement = document.createElement('li');
     liElement.innerHTML = `<input class="check-box" type="checkbox" name="checkbox" id="${tasks[i].index}"/><span>${tasks[i].description}: ${tasks[i].index}</span><i class="fas fa-ellipsis-v fa-1x"></i>`;
@@ -58,4 +55,5 @@ document.addEventListener('DOMContentLoaded', () => {
       Storage.setLocal(tasks);
     });
   });
+  UI.checkStatus(tasks, checkbox);
 });
