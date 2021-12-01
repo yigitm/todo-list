@@ -25,16 +25,16 @@ ul li {
   list-style: none;
 }
 
-span {
+.check-box,
+ul li {
+  margin-right: 1em;
+}
+
+.arrow {
   position: relative;
   z-index: 2;
   top: 0.1em;
   right: 1.4em;
-}
-
-.check-box,
-ul li {
-  margin-right: 1em;
 }
 
 .todo-head {
