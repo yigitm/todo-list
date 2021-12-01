@@ -22,9 +22,9 @@ Final version of the app would include; adding, removing, and completing tasks f
 
 ### Usage
 
-By clicking the live demo link you can access to projects's landing page.
+By clicking the live demo link to access projects's landing page.
 
-You can add/remove and complete tasks. You cna mark the tasks as completed.
+You add/remove and complete tasks. You can mark the tasks as completed.
 
 ## Authors
 
