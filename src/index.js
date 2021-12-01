@@ -3,20 +3,38 @@ import _ from 'lodash';
 import './style.css';
 
 const ulElement = document.getElementsByTagName('ul')[0];
-const tasks = [];
+const tasks = [
+  {
+    description: `Task`,
+    completed: false,
+    index: 0,
+  },
+  {
+    description: `Task`,
+    completed: false,
+    index: 1,
+  },
+  {
+    description: `Task`,
+    completed: false,
+    index: 2,
+  },
+  {
+    description: `Task`,
+    completed: false,
+    index: 3,
+  },
+  {
+    description: `Task`,
+    completed: false,
+    index: 4,
+  },
+];
 
 const createTask = () => {
-  for (let index = 0; index < 5; index += 1) {
+  for (const task of tasks) {
     const liElement = document.createElement('li');
-    const task = {
-      description: `Task ${index}`,
-      completed: false,
-      id: tasks.length - 1,
-    };
-
-    task.id += 1;
-    tasks.push(task);
-    liElement.innerHTML = `<input class="check-box" type="checkbox" name="" id="" /><li>${task.description}</li><i class="fas fa-ellipsis-v fa-1x"></i>`;
+    liElement.innerHTML = `<input class="check-box" type="checkbox" name="" id="" /><li>${task.description}: ${task.index}</li><i class="fas fa-ellipsis-v fa-1x"></i>`;
     ulElement.appendChild(liElement);
   }
 };
