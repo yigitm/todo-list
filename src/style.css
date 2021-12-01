@@ -2,5 +2,51 @@ body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  background-color: rgb(194, 150, 235);
+}
+
+main,
+.todo-head {
+  display: flex;
+  align-items: center;
+}
+
+main {
+  flex-direction: column;
+}
+
+ul {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}
+
+ul li {
+  display: inline;
+  list-style: none;
+}
+
+span {
+  position: relative;
+  z-index: 2;
+  top: 0.1em;
+  right: 1.4em;
+}
+
+.check-box,
+ul li {
+  margin-right: 1em;
+}
+
+.todo-head {
+  width: 100%;
+  justify-content: space-around;
+  flex-direction: row;
+}
+
+.clear {
+  color: rgb(109, 99, 99);
+}
+
+#task-input {
+  width: 55vw;
 }
