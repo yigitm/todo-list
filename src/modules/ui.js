@@ -4,8 +4,10 @@ const UI = (() => {
     let count = 0;
     if (status.style.textDecoration == 'line-through') {
       status.style.textDecoration = 'none';
+      return false;
     } else {
       status.style.textDecoration = 'line-through';
+      return true;
     }
   };
   return { updateStatus };

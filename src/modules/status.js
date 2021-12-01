@@ -1,7 +1,11 @@
 const Status = (() => {
   const updateStatus = (checkbox, tasks) => {
     const status = tasks[checkbox.id];
-    status.completed = true;
+    if (status.completed) {
+      status.completed = false;
+    } else {
+      status.completed = true;
+    }
   };
   return { updateStatus };
 })();
