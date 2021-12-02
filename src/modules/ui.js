@@ -1,7 +1,10 @@
+import Add from './add';
+import Storage from './storage';
+
 const UI = (() => {
   const ulElement = document.getElementsByTagName('ul')[0];
 
-  const updateStatus = (eTarget) => {
+  const updateCrossLine = (eTarget) => {
     const status = eTarget.nextElementSibling;
     if (status.style.textDecoration === 'line-through') {
       status.style.textDecoration = 'none';
@@ -11,7 +14,7 @@ const UI = (() => {
     return true;
   };
 
-  const checkStatus = (tasks, checkbox) => {
+  const checkCrossline = (tasks, checkbox) => {
     if (tasks != null) {
       tasks.forEach((element) => {
         if (element.completed === true) {
@@ -22,12 +25,24 @@ const UI = (() => {
     }
   };
 
-  const createTask = () => {
+  const createTaskUI = (task) => {
     const liElement = document.createElement('li');
-    liElement.innerHTML = `<input class="check-box" type="checkbox" name="checkbox" id="${tasks[i].index}"/><span>${tasks[i].description}: ${tasks[i].index}</span><i class="fas fa-ellipsis-v fa-1x"></i>`;
+    liElement.innerHTML = `<input class="check-box" type="checkbox" name="checkbox" id="${
+      task.index
+    }" ${task.completed ? 'checked' : ''}/><span>${task.description}
+    </span><i class="fas fa-ellipsis-v fa-1x"></i>`;
     ulElement.appendChild(liElement);
   };
 
-  return { updateStatus, checkStatus };
+  const showTasks = () => {
+    if (localStorage.length > 0) {
+      Add.tasks = Storage.getLocal();
+      Add.tasks.forEach((task) => {
+        createTaskUI(task);
+      });
+    }
+  };
+
+  return { updateCrossLine, checkCrossline, createTaskUI, showTasks };
 })();
 export default UI;

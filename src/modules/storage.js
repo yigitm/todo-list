@@ -4,7 +4,7 @@ const Storage = (() => {
   };
 
   const getLocal = () => {
-    const localData = JSON.parse(localStorage.getItem('Tasks'));
+    let localData = JSON.parse(localStorage.getItem('Tasks'));
     return localData;
   };
   return { setLocal, getLocal };
