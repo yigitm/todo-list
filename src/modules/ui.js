@@ -1,5 +1,6 @@
 import Add from './add';
 import Storage from './storage';
+import Edit from './edit';
 
 const UI = (() => {
   const ulElement = document.getElementsByTagName('ul')[0];
@@ -29,7 +30,9 @@ const UI = (() => {
     const liElement = document.createElement('li');
     liElement.innerHTML = `<input class="check-box" type="checkbox" name="checkbox" id="${
       task.index
-    }" ${task.completed ? 'checked' : ''}/><span>${task.description}
+    }" ${
+      task.completed ? 'checked' : ''
+    }/><span contentEditable="false" id="edit">${task.description}
     </span><i class="fas fa-ellipsis-v fa-1x"></i>`;
     ulElement.appendChild(liElement);
   };
@@ -43,6 +46,41 @@ const UI = (() => {
     }
   };
 
-  return { updateCrossLine, checkCrossline, createTaskUI, showTasks };
+  const changeDescription = () => {
+    const spanElements = document.querySelectorAll('#edit');
+    spanElements.forEach((span) => {
+      let count = 0;
+      span.addEventListener('click', () => {
+        if (span.contentEditable === true) {
+          span.contentEditable = false;
+          span.nextElementSibling.classList = 'fas fa-ellipsis-v fa-1x';
+        } else {
+          span.contentEditable = true;
+          span.style.backgroundColor = 'bisque';
+          span.nextElementSibling.classList = 'far fa-trash-alt';
+          keyEvent(span);
+        }
+      });
+    });
+  };
+
+  const keyEvent = (span) => {
+    span.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') {
+        span.nextElementSibling.classList = 'fas fa-ellipsis-v fa-1x';
+        e.preventDefault();
+        span.contentEditable = false;
+        Edit.descriptionValue(span);
+      }
+    });
+  };
+
+  return {
+    updateCrossLine,
+    checkCrossline,
+    createTaskUI,
+    showTasks,
+    changeDescription,
+  };
 })();
 export default UI;
