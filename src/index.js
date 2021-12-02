@@ -38,11 +38,15 @@ if (localStorage.length === 0) {
 }
 
 const createTask = () => {
-  for (let i = 0; i < tasks.length; i += 1) {
+  tasks.forEach((task) => {
     const liElement = document.createElement('li');
-    liElement.innerHTML = `<input class="check-box" type="checkbox" name="checkbox" id="${tasks[i].index}"/><span>${tasks[i].description}: ${tasks[i].index}</span><i class="fas fa-ellipsis-v fa-1x"></i>`;
+    liElement.innerHTML = `<input class="check-box" type="checkbox" name="checkbox" id="${
+      task.index
+    }" ${task.completed ? 'checked' : ''}/><span>${task.description}: ${
+      task.index
+    }</span><i class="fas fa-ellipsis-v fa-1x"></i>`;
     ulElement.appendChild(liElement);
-  }
+  });
 };
 
 document.addEventListener('DOMContentLoaded', () => {
