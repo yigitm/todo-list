@@ -2,7 +2,6 @@ import './style.css';
 import UI from './modules/ui';
 
 UI.showTasks();
-
 UI.enterEvent();
 UI.arrowEvent();
 
@@ -13,3 +12,7 @@ textAreas.forEach((text) => {
     UI.editTask(trimmed, text.previousSibling.id);
   });
 });
+
+const checkbox = document.querySelectorAll('.check-box');
+
+UI.filterCompleted(checkbox);
