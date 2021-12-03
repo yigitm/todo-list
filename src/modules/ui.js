@@ -32,8 +32,8 @@ const UI = (() => {
       task.index
     }" ${
       task.completed ? 'checked' : ''
-    }/><span contentEditable="false" id="edit">${task.description}
-    </span><i class="fas fa-ellipsis-v fa-1x"></i>`;
+    }/><text contentEditable="false" id="edit">${task.description}
+    </text><i class="fas fa-ellipsis-v fa-1x"></i>`;
     ulElement.appendChild(liElement);
   };
 
@@ -49,8 +49,7 @@ const UI = (() => {
   const changeDescription = () => {
     const spanElements = document.querySelectorAll('#edit');
     spanElements.forEach((span) => {
-      let count = 0;
-      span.addEventListener('click', () => {
+      span.addEventListener('mouseover', (e) => {
         if (span.contentEditable === true) {
           span.contentEditable = false;
           span.nextElementSibling.classList = 'fas fa-ellipsis-v fa-1x';

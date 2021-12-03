@@ -1,10 +1,11 @@
 import Storage from './storage';
 import Add from './add';
+import UI from './ui';
 
 const Edit = (() => {
   const descriptionValue = (span) => {
-    console.log(span.previousSibling.id);
-    console.log(span.innerText);
+    Add.tasks[span.previousSibling.id].description = span.innerText;
+    Storage.setLocal(Add.tasks);
   };
   return { descriptionValue };
 })();

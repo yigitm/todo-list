@@ -7,7 +7,6 @@ import Edit from './modules/edit';
 
 document.addEventListener('DOMContentLoaded', () => {
   UI.showTasks();
-  console.log(Add.tasks);
   const checkbox = document.querySelectorAll('.check-box');
   checkbox.forEach((element) => {
     element.addEventListener('change', (e) => {
@@ -17,7 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
   UI.checkCrossline(Add.tasks, checkbox);
+  UI.changeDescription();
 });
 Add.enterEvent();
 Add.arrowEvent();
-UI.changeDescription();

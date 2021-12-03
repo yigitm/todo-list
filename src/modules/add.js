@@ -4,7 +4,7 @@ import Storage from './storage';
 const Add = (() => {
   const inputElement = document.getElementById('task-input');
 
-  let tasks = localStorage.length > 0 ? [Storage.getLocal()] : [];
+  let tasks = localStorage.length > 0 ? Storage.getLocal() : [];
 
   //Add task when press enter
   const enterEvent = () => {
@@ -32,7 +32,6 @@ const Add = (() => {
 
     task.description = inputElement.value;
     tasks.push(task);
-    console.log(tasks);
     Storage.setLocal(tasks);
     UI.createTaskUI(task);
   };
