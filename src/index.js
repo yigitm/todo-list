@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const checkbox = document.querySelectorAll('.check-box');
   checkbox.forEach((element) => {
     element.addEventListener('change', (e) => {
-      Status.updateStatus(e.target, Add.tasks);
+      Status.updateStatus(e.target);
       UI.updateCrossLine(e.target);
       Storage.setLocal(Add.tasks);
     });
