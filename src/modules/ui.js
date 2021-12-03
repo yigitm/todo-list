@@ -9,6 +9,7 @@ const UI = (() => {
 
   const updateCrossLine = (eTarget) => {
     const status = eTarget.nextElementSibling;
+    console.log('dfgh');
     if (status.style.textDecoration === 'line-through') {
       status.style.textDecoration = 'none';
       return false;
@@ -34,8 +35,8 @@ const UI = (() => {
       task.index
     }" ${
       task.completed ? 'checked' : ''
-    }/><text contentEditable="false" id="edit">${task.description}
-    </text><i class="fas fa-ellipsis-v fa-1x"></i>`;
+    }/><span contentEditable="false" id="edit">${task.description}
+    </span><i class="fas fa-ellipsis-v fa-1x"></i>`;
     ulElement.appendChild(liElement);
   };
 
@@ -55,6 +56,7 @@ const UI = (() => {
         if (span.contentEditable === true) {
           span.contentEditable = false;
           span.nextElementSibling.classList = 'fas fa-ellipsis-v fa-1x';
+          outEvent(span);
         } else {
           span.contentEditable = true;
           span.style.backgroundColor = 'bisque';
@@ -73,6 +75,7 @@ const UI = (() => {
         e.preventDefault();
         span.contentEditable = false;
         Edit.descriptionValue(span);
+        span.style.backgroundColor = null;
       }
     });
   };

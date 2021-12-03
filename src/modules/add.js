@@ -12,6 +12,7 @@ const Add = (() => {
       if (e.key === 'Enter') {
         e.preventDefault();
         createTask();
+        location.reload();
       }
     });
   };
