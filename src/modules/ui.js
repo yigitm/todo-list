@@ -2,6 +2,7 @@ import Add from './add';
 import Storage from './storage';
 import Edit from './edit';
 import Remove from './remove';
+import Clear from './clear';
 
 const UI = (() => {
   const ulElement = document.getElementsByTagName('ul')[0];
@@ -84,6 +85,18 @@ const UI = (() => {
     });
   };
 
+  const removeAllCompleted = (checkbox) => {
+    const clearElement = document.querySelector('.clear');
+    clearElement.addEventListener('click', () => {
+      checkbox.forEach((box) => {
+        if (box.checked) {
+          box.parentNode.remove();
+          Clear.completedValues(box);
+        }
+      });
+    });
+  };
+
   return {
     updateCrossLine,
     checkCrossline,
@@ -91,6 +104,7 @@ const UI = (() => {
     showTasks,
     changeDescription,
     removeTask,
+    removeAllCompleted,
   };
 })();
 export default UI;

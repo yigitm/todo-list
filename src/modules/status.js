@@ -5,10 +5,8 @@ const Status = (() => {
     const taskIndex = Add.tasks.findIndex(
       (task) => task.index === parseInt(checkbox.id, 10),
     );
-    let task = Add.tasks[parseInt(taskIndex, 10)];
+    let task = Add.tasks[taskIndex];
     task.completed ? (task.completed = false) : (task.completed = true);
-
-    console.log(task.completed);
   };
   return { updateStatus };
 })();
