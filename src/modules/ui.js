@@ -113,8 +113,6 @@ const UI = (() => {
     );
     tasks[itemIndex].description = text;
     setLocal(tasks);
-    console.log(tasks);
-    console.log();
   };
 
   const showTasks = () => {

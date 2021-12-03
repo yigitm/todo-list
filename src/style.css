@@ -31,7 +31,7 @@ ul {
 }
 
 ul li {
-  display: inline;
+  display: flex;
   list-style: none;
 }
 
@@ -67,7 +67,7 @@ input {
 }
 
 #task-input {
-  width: 55vw;
+  width: 58vw;
 }
 
 textarea {
@@ -76,5 +76,5 @@ textarea {
 }
 
 textarea:focus {
-  background-color: red;
+  background-color: bisque;
 }

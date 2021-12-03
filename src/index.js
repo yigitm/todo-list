@@ -9,9 +9,8 @@ checkbox.forEach((element) => {
     UI.updateCrossLine(e.target);
   });
 });
-UI.createTaskUI();
+
 UI.checkCrossline(UI.tasks, checkbox);
-UI.filterCompleted(checkbox);
 UI.enterEvent();
 UI.arrowEvent();
 
