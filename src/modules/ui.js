@@ -9,7 +9,6 @@ const UI = (() => {
 
   const updateCrossLine = (eTarget) => {
     const status = eTarget.nextElementSibling;
-    console.log('dfgh');
     if (status.style.textDecoration === 'line-through') {
       status.style.textDecoration = 'none';
       return false;
@@ -71,8 +70,8 @@ const UI = (() => {
   const keyEvent = (span) => {
     span.addEventListener('keypress', (e) => {
       if (e.key === 'Enter') {
-        span.nextElementSibling.classList = 'fas fa-ellipsis-v fa-1x';
         e.preventDefault();
+        span.nextElementSibling.classList = 'fas fa-ellipsis-v fa-1x';
         span.contentEditable = false;
         Edit.descriptionValue(span);
         span.style.backgroundColor = null;
