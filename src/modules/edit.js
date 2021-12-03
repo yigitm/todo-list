@@ -1,6 +1,5 @@
 import Storage from './storage';
 import Add from './add';
-import UI from './ui';
 
 const Edit = (() => {
   const descriptionValue = (span) => {

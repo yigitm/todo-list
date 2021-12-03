@@ -14,8 +14,9 @@ document.addEventListener('DOMContentLoaded', () => {
       UI.updateCrossLine(e.target);
       Storage.setLocal(Add.tasks);
     });
+    UI.checkCrossline(Add.tasks, checkbox);
   });
-  UI.checkCrossline(Add.tasks, checkbox);
+
   UI.changeDescription();
 });
 Add.enterEvent();

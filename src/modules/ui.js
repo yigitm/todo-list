@@ -1,6 +1,7 @@
 import Add from './add';
 import Storage from './storage';
 import Edit from './edit';
+import Remove from './remove';
 
 const UI = (() => {
   const ulElement = document.getElementsByTagName('ul')[0];
@@ -49,7 +50,7 @@ const UI = (() => {
   const changeDescription = () => {
     const spanElements = document.querySelectorAll('#edit');
     spanElements.forEach((span) => {
-      span.addEventListener('mouseover', (e) => {
+      span.addEventListener('mouseenter', (e) => {
         if (span.contentEditable === true) {
           span.contentEditable = false;
           span.nextElementSibling.classList = 'fas fa-ellipsis-v fa-1x';
@@ -58,6 +59,7 @@ const UI = (() => {
           span.style.backgroundColor = 'bisque';
           span.nextElementSibling.classList = 'far fa-trash-alt';
           keyEvent(span);
+          removeTask(span);
         }
       });
     });
@@ -74,12 +76,21 @@ const UI = (() => {
     });
   };
 
+  const removeTask = (span) => {
+    const deleteIcon = span.nextElementSibling;
+    deleteIcon.addEventListener('click', () => {
+      span.parentNode.remove();
+      Remove.taskValue(span);
+    });
+  };
+
   return {
     updateCrossLine,
     checkCrossline,
     createTaskUI,
     showTasks,
     changeDescription,
+    removeTask,
   };
 })();
 export default UI;
