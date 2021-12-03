@@ -2,15 +2,7 @@ import './style.css';
 import UI from './modules/ui';
 
 UI.showTasks();
-const checkbox = document.querySelectorAll('.check-box');
-checkbox.forEach((element) => {
-  element.addEventListener('change', (e) => {
-    UI.updateStatus(e.target);
-    UI.updateCrossLine(e.target);
-  });
-});
 
-UI.checkCrossline(UI.tasks, checkbox);
 UI.enterEvent();
 UI.arrowEvent();
 

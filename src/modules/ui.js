@@ -105,6 +105,15 @@ const UI = (() => {
         UI.removeTask(icon);
       });
     });
+
+    const checkbox = document.querySelectorAll('.check-box');
+    checkbox.forEach((element) => {
+      element.addEventListener('change', (e) => {
+        UI.updateStatus(e.target);
+        UI.updateCrossLine(e.target);
+      });
+    });
+    checkCrossline(tasks, checkbox);
   };
 
   const editTask = (text, index) => {
