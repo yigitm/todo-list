@@ -1,92 +1,29 @@
 const UI = (() => {
-  const setLocal = (tasks) => {
-    localStorage.setItem('Tasks', JSON.stringify(tasks));
-  };
-
   const getLocal = () => {
     const localData = JSON.parse(localStorage.getItem('Tasks'));
     return localData;
   };
-  // Create task
-  const inputElement = document.getElementById('task-input');
-  let tasks = localStorage.length > 0 ? getLocal() : [];
-  const createTask = () => {
-    const task = {
-      description: inputElement.value,
-      completed: false,
-      index: tasks.length,
-    };
 
-    tasks.push(task);
-    setLocal(tasks);
-    showTasks();
-  };
-  // Add task when press enter
-  const enterEvent = () => {
-    inputElement.addEventListener('keyup', (e) => {
-      if (e.key === 'Enter') {
-        e.preventDefault();
-        createTask();
-      }
-    });
-  };
-  // Add task when click
-  const arrowEvent = () => {
-    const iconElement = document.getElementById('create-task');
-    iconElement.addEventListener('click', () => {
-      createTask();
-    });
-  };
-  // Update value of completed
-  const updateStatus = (checkbox) => {
-    const taskIndex = tasks.findIndex(
-      (task) => task.index === parseInt(checkbox.id, 10),
-    );
-
-    if (tasks[taskIndex].completed) {
-      tasks[taskIndex].completed = false;
-      setLocal(tasks);
-    } else {
-      tasks[taskIndex].completed = true;
-      setLocal(tasks);
-    }
-  };
-
-  // Remove task from local storage & temporary array tasks
-  const taskValue = (icon) => {
-    const itemIndex = tasks.findIndex(
-      (task) => task.index === parseInt(icon.previousSibling.id, 10),
-    );
-    tasks.splice(itemIndex, 1);
-    setLocal(tasks);
-  };
-  //UI related functions starts from here
-  const ulElement = document.getElementsByTagName('ul')[0];
-
-  const updateCrossLine = (eTarget) => {
-    const status = eTarget.nextElementSibling;
-    if (status.style.textDecoration === 'line-through') {
-      status.style.textDecoration = 'none';
-      return false;
-    }
-    status.style.textDecoration = 'line-through';
-    return true;
+  const setLocal = (tasks) => {
+    localStorage.setItem('Tasks', JSON.stringify(tasks));
   };
 
   const checkCrossline = (tasks, checkbox) => {
     if (tasks != null) {
       tasks.forEach((element) => {
         if (element.completed === true) {
-          checkbox[element.index].nextElementSibling.style.textDecoration =
-            'line-through';
+          checkbox[element.index].nextElementSibling.style.textDecoration = 'line-through';
         }
       });
     }
   };
 
-  const createTaskUI = (task) => {
+  const inputElement = document.getElementById('task-input');
+  let tasks = localStorage.length > 0 ? getLocal() : [];
+
+  const createTaskUI = () => {
     const taskContainer = document.getElementById('task-container');
-    let allTasks = JSON.parse(localStorage.getItem('Tasks'));
+    const allTasks = JSON.parse(localStorage.getItem('Tasks'));
     let taskLi = '<ul>';
     allTasks.forEach((task) => {
       taskLi += `<li><input class="check-box" type="checkbox" name="checkbox" id="${
@@ -115,15 +52,6 @@ const UI = (() => {
     });
     checkCrossline(tasks, checkbox);
   };
-
-  const editTask = (text, index) => {
-    const itemIndex = tasks.findIndex(
-      (task) => task.index === parseInt(index, 10),
-    );
-    tasks[itemIndex].description = text;
-    setLocal(tasks);
-  };
-
   const showTasks = () => {
     if (localStorage.length > 0) {
       tasks = getLocal();
@@ -131,6 +59,77 @@ const UI = (() => {
         createTaskUI(task);
       });
     }
+  };
+  // Create task
+  const createTask = () => {
+    const task = {
+      description: inputElement.value,
+      completed: false,
+      index: tasks.length,
+    };
+
+    tasks.push(task);
+    setLocal(tasks);
+    showTasks();
+  };
+  // Add task when press enter
+  const enterEvent = () => {
+    inputElement.addEventListener('keyup', (e) => {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        createTask();
+      }
+    });
+  };
+
+  // Add task when click
+  const arrowEvent = () => {
+    const iconElement = document.getElementById('create-task');
+    iconElement.addEventListener('click', () => {
+      createTask();
+    });
+  };
+
+  // Update value of completed
+  const updateStatus = (checkbox) => {
+    const taskIndex = tasks.findIndex(
+      (task) => task.index === parseInt(checkbox.id, 10),
+    );
+
+    if (tasks[taskIndex].completed) {
+      tasks[taskIndex].completed = false;
+      setLocal(tasks);
+    } else {
+      tasks[taskIndex].completed = true;
+      setLocal(tasks);
+    }
+  };
+
+  // Remove task from local storage & temporary array tasks
+  const taskValue = (icon) => {
+    const itemIndex = tasks.findIndex(
+      (task) => task.index === parseInt(icon.previousSibling.id, 10),
+    );
+    tasks.splice(itemIndex, 1);
+    setLocal(tasks);
+  };
+  // UI related functions starts from here
+  const updateCrossLine = (eTarget) => {
+    const status = eTarget.nextElementSibling;
+    if (status.style.textDecoration === 'line-through') {
+      status.style.textDecoration = 'none';
+      return false;
+    }
+    status.style.textDecoration = 'line-through';
+    return true;
+  };
+
+  const editTask = (text, index) => {
+    const itemIndex = tasks.findIndex(
+      (task) => task.index === parseInt(index, 10),
+    );
+    tasks[itemIndex].description = text;
+    setLocal(tasks);
   };
 
   const removeTask = (icon) => {
