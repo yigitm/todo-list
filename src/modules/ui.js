@@ -1,8 +1,4 @@
-import Add from './add';
-import Storage from './storage';
-import Edit from './edit';
-import Remove from './remove';
-import Clear from './clear';
+import Backend from './backend';
 
 const UI = (() => {
   const ulElement = document.getElementsByTagName('ul')[0];
@@ -41,21 +37,40 @@ const UI = (() => {
 
   const showTasks = () => {
     if (localStorage.length > 0) {
-      Add.tasks = Storage.getLocal();
-      Add.tasks.forEach((task) => {
+      Backend.tasks = Backend.getLocal();
+      Backend.tasks.forEach((task) => {
         createTaskUI(task);
       });
     }
   };
 
+  const keyEvent = (span) => {
+    span.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        span.nextElementSibling.classList = 'fas fa-ellipsis-v fa-1x';
+        span.contentEditable = false;
+        Backend.descriptionValue(span);
+        span.style.backgroundColor = null;
+      }
+    });
+  };
+
+  const removeTask = (span) => {
+    const deleteIcon = span.nextElementSibling;
+    deleteIcon.addEventListener('click', () => {
+      span.parentNode.remove();
+      Backend.taskValue(span);
+    });
+  };
+
   const changeDescription = () => {
     const spanElements = document.querySelectorAll('#edit');
     spanElements.forEach((span) => {
-      span.addEventListener('mouseenter', (e) => {
+      span.addEventListener('mouseenter', () => {
         if (span.contentEditable === true) {
           span.contentEditable = false;
           span.nextElementSibling.classList = 'fas fa-ellipsis-v fa-1x';
-          outEvent(span);
         } else {
           span.contentEditable = true;
           span.style.backgroundColor = 'bisque';
@@ -67,34 +82,18 @@ const UI = (() => {
     });
   };
 
-  const keyEvent = (span) => {
-    span.addEventListener('keypress', (e) => {
-      if (e.key === 'Enter') {
-        e.preventDefault();
-        span.nextElementSibling.classList = 'fas fa-ellipsis-v fa-1x';
-        span.contentEditable = false;
-        Edit.descriptionValue(span);
-        span.style.backgroundColor = null;
-      }
-    });
-  };
-
-  const removeTask = (span) => {
-    const deleteIcon = span.nextElementSibling;
-    deleteIcon.addEventListener('click', () => {
-      span.parentNode.remove();
-      Remove.taskValue(span);
-    });
-  };
-
-  const removeAllCompleted = (checkbox) => {
-    const clearElement = document.querySelector('.clear');
-    clearElement.addEventListener('click', () => {
-      checkbox.forEach((box) => {
-        if (box.checked) {
-          box.parentNode.remove();
-          Clear.completedValues(box);
+  const filterCompleted = (checkbox) => {
+    const clear = document.querySelector('.clear');
+    let arr = [];
+    clear.addEventListener('click', () => {
+      Backend.tasks.filter((item) => {
+        if (item.completed) {
+          arr.push(item.index);
         }
+      });
+      arr.forEach((element) => {
+        checkbox[element].parentNode.style.display = 'none';
+        console.log();
       });
     });
   };
@@ -106,7 +105,7 @@ const UI = (() => {
     showTasks,
     changeDescription,
     removeTask,
-    removeAllCompleted,
+    filterCompleted,
   };
 })();
 export default UI;
