@@ -1,6 +1,4 @@
-import UI from './ui';
-
-const Backend = (() => {
+const UI = (() => {
   const setLocal = (tasks) => {
     localStorage.setItem('Tasks', JSON.stringify(tasks));
   };
@@ -21,7 +19,7 @@ const Backend = (() => {
 
     tasks.push(task);
     setLocal(tasks);
-    createTaskUI(task);
+    showTasks();
   };
   // Add task when press enter
   const enterEvent = () => {
@@ -29,7 +27,6 @@ const Backend = (() => {
       if (e.key === 'Enter') {
         e.preventDefault();
         createTask();
-        //location.reload();
       }
     });
   };
@@ -54,15 +51,11 @@ const Backend = (() => {
       setLocal(tasks);
     }
   };
-  // Update description value
-  const descriptionValue = (span) => {
-    tasks[span.previousSibling.id].description = span.innerText;
-    setLocal(tasks);
-  };
+
   // Remove task from local storage & temporary array tasks
-  const taskValue = (span) => {
+  const taskValue = (icon) => {
     const itemIndex = tasks.findIndex(
-      (task) => task.index === parseInt(span.previousSibling.id, 10),
+      (task) => task.index === parseInt(icon.previousSibling.id, 10),
     );
     tasks.splice(itemIndex, 1);
     setLocal(tasks);
@@ -101,10 +94,27 @@ const Backend = (() => {
       }" ${
         task.completed ? 'checked' : ''
       }/><textarea contentEditable="false" id="edit">${task.description}
-    </textarea><i class="fas fa-ellipsis-v fa-1x"></i></li>`;
+    </textarea><i id="trash" class="far fa-trash-alt fa-1x"></i></li>`;
     });
     taskLi += '</ul>';
     taskContainer.innerHTML = taskLi;
+    const deleteIcon = document.querySelectorAll('#trash');
+
+    deleteIcon.forEach((icon) => {
+      icon.addEventListener('click', () => {
+        UI.removeTask(icon);
+      });
+    });
+  };
+
+  const editTask = (text, index) => {
+    const itemIndex = tasks.findIndex(
+      (task) => task.index === parseInt(index, 10),
+    );
+    tasks[itemIndex].description = text;
+    setLocal(tasks);
+    console.log(tasks);
+    console.log();
   };
 
   const showTasks = () => {
@@ -116,42 +126,9 @@ const Backend = (() => {
     }
   };
 
-  const keyEvent = (span) => {
-    span.addEventListener('keypress', (e) => {
-      if (e.key === 'Enter') {
-        e.preventDefault();
-        span.nextElementSibling.classList = 'fas fa-ellipsis-v fa-1x';
-        span.contentEditable = false;
-        descriptionValue(span);
-        span.style.backgroundColor = null;
-      }
-    });
-  };
-
-  const removeTask = (span) => {
-    const deleteIcon = span.nextElementSibling;
-    deleteIcon.addEventListener('click', () => {
-      span.parentNode.remove();
-      taskValue(span);
-    });
-  };
-
-  const changeDescription = () => {
-    const spanElements = document.querySelectorAll('#edit');
-    spanElements.forEach((span) => {
-      span.addEventListener('mouseenter', () => {
-        if (span.contentEditable === true) {
-          span.contentEditable = false;
-          span.nextElementSibling.classList = 'fas fa-ellipsis-v fa-1x';
-        } else {
-          span.contentEditable = true;
-          span.style.backgroundColor = 'bisque';
-          span.nextElementSibling.classList = 'far fa-trash-alt';
-          keyEvent(span);
-          removeTask(span);
-        }
-      });
-    });
+  const removeTask = (icon) => {
+    icon.parentNode.remove();
+    taskValue(icon);
   };
 
   const filterCompleted = (checkbox) => {
@@ -178,15 +155,14 @@ const Backend = (() => {
     enterEvent,
     arrowEvent,
     updateStatus,
-    descriptionValue,
     taskValue,
     updateCrossLine,
     checkCrossline,
     createTaskUI,
     showTasks,
-    changeDescription,
     removeTask,
+    editTask,
     filterCompleted,
   };
 })();
-export default Backend;
+export default UI;
