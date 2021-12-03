@@ -69,3 +69,12 @@ input {
 #task-input {
   width: 55vw;
 }
+
+textarea {
+  border: 0;
+  outline: none;
+}
+
+textarea:focus {
+  background-color: red;
+}
