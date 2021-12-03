@@ -1,3 +1,5 @@
+/* eslint-disable no-restricted-globals */
+/* eslint-disable import/no-cycle */
 import UI from './ui';
 
 const Backend = (() => {
@@ -9,7 +11,7 @@ const Backend = (() => {
     const localData = JSON.parse(localStorage.getItem('Tasks'));
     return localData;
   };
-  //Create task
+  // Create task
   const inputElement = document.getElementById('task-input');
   const tasks = localStorage.length > 0 ? getLocal() : [];
   const createTask = () => {
@@ -41,7 +43,7 @@ const Backend = (() => {
       createTask();
     });
   };
-  //Update value of completed
+  // Update value of completed
   const updateStatus = (checkbox) => {
     const taskIndex = tasks.findIndex(
       (task) => task.index === parseInt(checkbox.id, 10),
@@ -55,12 +57,12 @@ const Backend = (() => {
       setLocal(tasks);
     }
   };
-  //Update description value
+  // Update description value
   const descriptionValue = (span) => {
     tasks[span.previousSibling.id].description = span.innerText;
     setLocal(tasks);
   };
-  //Remove task from local storage & temporary array tasks
+  // Remove task from local storage & temporary array tasks
   const taskValue = (span) => {
     const itemIndex = tasks.findIndex(
       (task) => task.index === parseInt(span.previousSibling.id, 10),
@@ -68,7 +70,7 @@ const Backend = (() => {
     tasks.splice(itemIndex, 1);
     setLocal(tasks);
 
-    //Clear all completed tasks
+    // Clear all completed tasks
   };
   return {
     tasks,

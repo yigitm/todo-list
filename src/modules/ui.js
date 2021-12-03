@@ -1,3 +1,4 @@
+/* eslint-disable import/no-cycle */
 import Backend from './backend';
 
 const UI = (() => {
@@ -17,8 +18,7 @@ const UI = (() => {
     if (tasks != null) {
       tasks.forEach((element) => {
         if (element.completed === true) {
-          checkbox[element.index].nextElementSibling.style.textDecoration =
-            'line-through';
+          checkbox[element.index].nextElementSibling.style.textDecoration = 'line-through';
         }
       });
     }
@@ -84,16 +84,16 @@ const UI = (() => {
 
   const filterCompleted = (checkbox) => {
     const clear = document.querySelector('.clear');
-    let arr = [];
+    const filters = [];
     clear.addEventListener('click', () => {
       Backend.tasks.filter((item) => {
         if (item.completed) {
-          arr.push(item.index);
+          filters.push(item.index);
         }
+        return filters;
       });
-      arr.forEach((element) => {
+      filters.forEach((element) => {
         checkbox[element].parentNode.style.display = 'none';
-        console.log();
       });
     });
   };
