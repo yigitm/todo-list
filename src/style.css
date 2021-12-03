@@ -11,23 +11,42 @@ main,
 }
 
 main {
+  width: 75%;
+  margin: 5rem auto;
   flex-direction: column;
+  border: 1px solid grey;
+  border-radius: 0.5em;
+}
+
+input {
+  margin-left: 2em;
+  padding: 1em;
 }
 
 ul {
   display: flex;
+  padding: 1em;
   flex-direction: column;
   gap: 1em;
 }
 
 ul li {
-  display: inline;
+  display: flex;
   list-style: none;
 }
 
 .check-box,
 ul li {
+  padding: 1em;
   margin-right: 1em;
+}
+
+main,
+ul,
+ul li,
+input {
+  border: 1px solid grey;
+  border-radius: 0.5em;
 }
 
 .arrow {
@@ -48,5 +67,14 @@ ul li {
 }
 
 #task-input {
-  width: 55vw;
+  width: 58vw;
+}
+
+textarea {
+  border: 0;
+  outline: none;
+}
+
+textarea:focus {
+  background-color: bisque;
 }

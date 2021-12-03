@@ -17,22 +17,14 @@
     <main>
       <section class="todo-head">
         <h1>Today's To Do</h1>
-        <i class="fas fa-sync fa-1x"></i>
       </section>
 
       <section class="todo-list">
-        <form>
-          <input
-            type="text"
-            id="task-input"
-            placeholder="Add to your list..."
-          />
-          <i class="arrow fas fa-arrow-right"></i>
-        </form>
-
-        <ul></ul>
+        <input type="text" id="task-input" placeholder="Add to your list..." />
+        <i id="create-task" class="arrow fas fa-arrow-right fa-2x"></i>
+        <div id="task-container"></div>
       </section>
-
+      <input type="hidden" name="" />
       <section class="clear">
         <p>Clear all completed</p>
       </section>
