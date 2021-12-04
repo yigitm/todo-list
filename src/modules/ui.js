@@ -8,14 +8,9 @@ const UI = (() => {
     localStorage.setItem('Tasks', JSON.stringify(tasks));
   };
 
-  const checkCrossline = (tasks, checkbox) => {
-    if (tasks != null) {
-      tasks.forEach((element) => {
-        if (element.completed === true) {
-          checkbox[element.index].nextElementSibling.style.textDecoration = 'line-through';
-        }
-      });
-    }
+  const checkCrossline = (prm) => {
+    //task.index === box.id ? (box.style.textDecoration = 'line-through') : false;
+    console.log(prm);
   };
 
   const inputElement = document.getElementById('task-input');
@@ -35,30 +30,40 @@ const UI = (() => {
     });
     taskLi += '</ul>';
     taskContainer.innerHTML = taskLi;
-    const deleteIcon = document.querySelectorAll('#trash');
-
-    deleteIcon.forEach((icon) => {
-      icon.addEventListener('click', () => {
-        UI.removeTask(icon);
-      });
-    });
-
-    const checkbox = document.querySelectorAll('.check-box');
-    checkbox.forEach((element) => {
-      element.addEventListener('change', (e) => {
-        UI.updateStatus(e.target);
-        UI.updateCrossLine(e.target);
-      });
-    });
-    checkCrossline(tasks, checkbox);
+    checkCrossline();
   };
   const showTasks = () => {
+    const checkbox = document.querySelectorAll('.check-box');
+    const deleteIcon = document.querySelectorAll('#trash');
     if (localStorage.length > 0) {
       tasks = getLocal();
       tasks.forEach((task) => {
         createTaskUI(task);
       });
     }
+
+    deleteIcon.forEach((icon) => {
+      icon.addEventListener('click', () => {
+        removeTask(icon);
+      });
+    });
+
+    checkbox.forEach((element) => {
+      element.addEventListener('change', (e) => {
+        updateStatus(e.target);
+        updateCrossLine(e.target);
+      });
+    });
+
+    const textAreas = document.querySelectorAll('textarea');
+    textAreas.forEach((text) => {
+      text.addEventListener('change', () => {
+        const trimmed = text.value.trim();
+        UI.editTask(trimmed, text.previousSibling.id);
+      });
+    });
+
+    filterCompleted(checkbox);
   };
   // Create task
   const createTask = () => {
@@ -108,8 +113,10 @@ const UI = (() => {
   // Remove task from local storage & temporary array tasks
   const taskValue = (icon) => {
     const itemIndex = tasks.findIndex(
-      (task) => task.index === parseInt(icon.previousSibling.id, 10),
+      (task) =>
+        task.index === parseInt(icon.previousSibling.previousSibling.id, 10),
     );
+
     tasks.splice(itemIndex, 1);
     setLocal(tasks);
   };
