@@ -74,7 +74,3 @@ textarea {
   border: 0;
   outline: none;
 }
-
-textarea:focus {
-  background-color: bisque;
-}
