@@ -8,9 +8,8 @@ const UI = (() => {
     localStorage.setItem('Tasks', JSON.stringify(tasks));
   };
 
-  const checkCrossline = (prm) => {
-    //task.index === box.id ? (box.style.textDecoration = 'line-through') : false;
-    console.log(prm);
+  const checkCrossline = (task, box) => {
+    task.index === box.id ? (box.style.textDecoration = 'line-through') : false;
   };
 
   const inputElement = document.getElementById('task-input');
@@ -27,33 +26,34 @@ const UI = (() => {
         task.completed ? 'checked' : ''
       }/><textarea contentEditable="false" id="edit">${task.description}
     </textarea><i id="trash" class="far fa-trash-alt fa-1x"></i></li>`;
-    });
-    taskLi += '</ul>';
-    taskContainer.innerHTML = taskLi;
-    checkCrossline();
-  };
-  const showTasks = () => {
-    const checkbox = document.querySelectorAll('.check-box');
-    const deleteIcon = document.querySelectorAll('#trash');
-    if (localStorage.length > 0) {
-      tasks = getLocal();
-      tasks.forEach((task) => {
-        createTaskUI(task);
+      taskLi += '</ul>';
+      taskContainer.innerHTML = taskLi;
+      const checkbox = document.querySelectorAll('.check-box');
+      checkbox.forEach((element) => {
+        checkCrossline(task, element);
+        element.addEventListener('change', (e) => {
+          updateStatus(e.target);
+          updateCrossLine(e.target);
+        });
       });
-    }
+    });
 
+    const deleteIcon = document.querySelectorAll('#trash');
     deleteIcon.forEach((icon) => {
       icon.addEventListener('click', () => {
         removeTask(icon);
       });
     });
 
-    checkbox.forEach((element) => {
-      element.addEventListener('change', (e) => {
-        updateStatus(e.target);
-        updateCrossLine(e.target);
+    filterCompleted(checkbox);
+  };
+  const showTasks = () => {
+    if (localStorage.length > 0) {
+      tasks = getLocal();
+      tasks.forEach((task) => {
+        createTaskUI(task);
       });
-    });
+    }
 
     const textAreas = document.querySelectorAll('textarea');
     textAreas.forEach((text) => {
@@ -62,8 +62,6 @@ const UI = (() => {
         UI.editTask(trimmed, text.previousSibling.id);
       });
     });
-
-    filterCompleted(checkbox);
   };
   // Create task
   const createTask = () => {
