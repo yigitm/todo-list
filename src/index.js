@@ -4,6 +4,7 @@ import UI from './modules/ui';
 const addIcon = document.getElementById('create-task');
 const taskContainer = document.getElementById('task-container');
 const inputField = document.getElementById('task-input');
+const clear = document.getElementById('clear');
 
 //event for single task creation
 addIcon.addEventListener('click', () => {
@@ -30,4 +31,8 @@ addIcon.addEventListener('click', () => {
   taskWrapper.append(textArea);
   taskWrapper.append(delIcon);
   taskContainer.append(taskWrapper);
+});
+
+clear.addEventListener('click', () => {
+  UI.clearTask();
 });

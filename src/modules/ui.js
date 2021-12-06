@@ -16,6 +16,13 @@ const UI = (() => {
   const removeTask = (eTarget) => {
     eTarget.parentNode.remove();
   };
-  return { task, tasks, markTask, removeTask };
+
+  const clearTask = () => {
+    const checkedItems = document.querySelectorAll('.checked');
+    checkedItems.forEach((item) => {
+      item.checked ? (item.parentNode.style.display = 'none') : false;
+    });
+  };
+  return { task, tasks, markTask, removeTask, clearTask };
 })();
 export default UI;
