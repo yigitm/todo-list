@@ -35,7 +35,6 @@ ul li {
   list-style: none;
 }
 
-.check-box,
 ul li {
   padding: 1em;
   margin-right: 1em;
@@ -73,4 +72,12 @@ input {
 textarea {
   border: 0;
   outline: none;
+}
+
+#clear,
+.arrow,
+.far,
+.check-box,
+.checked {
+  cursor: pointer;
 }

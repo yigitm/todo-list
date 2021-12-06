@@ -13,10 +13,10 @@ const UI = (() => {
   };
 
   const createTask = () => {
-    const task = {
+    let task = {
       description: inputField.value,
       completed: false,
-      index: tasks.length,
+      index: tasks.length + 1,
     };
     tasks.push(task);
     setLocal(tasks);
@@ -56,21 +56,35 @@ const UI = (() => {
     });
   };
 
+  const indexFinder = (item) => {
+    let t = tasks.filter((t) => t.index === parseInt(item, 10));
+    return tasks.indexOf(t[0]);
+  };
+
   const markTask = (eTarget) => {
+    const markIndex = indexFinder(eTarget.parentNode.id);
+    console.log(tasks[markIndex].completed);
     eTarget.checked
-      ? (eTarget.nextSibling.style.textDecoration = 'line-through')
-      : (eTarget.nextSibling.style.textDecoration = '');
+      ? ((eTarget.nextSibling.style.textDecoration = 'line-through'),
+        (tasks[markIndex].completed = false))
+      : ((eTarget.nextSibling.style.textDecoration = ''),
+        (tasks[markIndex].completed = true));
   };
 
   const removeTask = (eTarget) => {
+    const taskIndex = indexFinder(eTarget.parentNode.id);
+    tasks.splice(taskIndex, 1);
+    setLocal(tasks);
     eTarget.parentNode.remove();
   };
 
   const clearTask = () => {
-    let checkedItems = document.querySelectorAll('.checked');
-    let [...allChecks] = checkedItems;
+    const checkedItems = document.querySelectorAll('.checked');
+    const [...allChecks] = checkedItems;
     allChecks
-      .filter((item) => item.checked === true)
+      .filter((item) => {
+        item.checked === true;
+      })
       .forEach((item) => {
         item.parentNode.style.display = 'none';
       });
