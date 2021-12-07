@@ -41,8 +41,8 @@ ul li {
 }
 
 main,
-ul,
-ul li,
+.task-container,
+textarea,
 input {
   border: 1px solid grey;
   border-radius: 0.5em;
@@ -72,6 +72,11 @@ input {
 textarea {
   border: 0;
   outline: none;
+}
+
+textarea:focus {
+  border-radius: 0.5em;
+  background-color: bisque;
 }
 
 #clear,

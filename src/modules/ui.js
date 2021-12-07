@@ -52,12 +52,22 @@ const UI = (() => {
     localStorage.length !== 0 ? (tasks = getLocal()) : false;
     tasks.forEach((task) => {
       taskElement(task);
+      checkCompleted(task);
     });
   };
 
   const indexFinder = (item) => {
     let t = tasks.filter((t) => t.index === parseInt(item, 10));
     return tasks.indexOf(t[0]);
+  };
+
+  const checkCompleted = (task) => {
+    let cBox = document.getElementById(task.index).firstChild;
+    console.log(cBox);
+    task.completed
+      ? ((cBox.nextSibling.style.textDecoration = 'line-through'),
+        (cBox.checked = true))
+      : false;
   };
 
   const markTask = (eTarget) => {
@@ -88,6 +98,7 @@ const UI = (() => {
         c.parentNode.style.display = 'none';
       });
   };
+
   return {
     tasks,
     taskElement,
