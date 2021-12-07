@@ -5,18 +5,18 @@ const addIcon = document.getElementById('create-task');
 const clear = document.getElementById('clear');
 const taskContainer = document.getElementById('task-container');
 
-//show local stroge items
+// show local stroge items
 document.addEventListener('DOMContentLoaded', () => {
   UI.showTasks();
 });
-//event for single task creation
+// event for single task creation
 addIcon.addEventListener('click', () => {
-  //Create single task element
+  // Create single task element
   UI.taskElement(UI.createTask());
 });
-//event to filter completed tasks
+// event to filter completed tasks
 clear.addEventListener('click', () => UI.clearTask());
-//event to edit tasks
+// event to edit tasks
 taskContainer.addEventListener('click', (e) => {
   if (e.target.id === 'edit') {
     UI.editTask(e.target);
