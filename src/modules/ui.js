@@ -21,7 +21,6 @@ const UI = (() => {
     tasks.push(task);
     setLocal(tasks);
     return task;
-    //console.log(tasks);
   };
 
   const taskElement = (task) => {
@@ -63,12 +62,14 @@ const UI = (() => {
 
   const markTask = (eTarget) => {
     const markIndex = indexFinder(eTarget.parentNode.id);
-    console.log(tasks[markIndex].completed);
+
     eTarget.checked
       ? ((eTarget.nextSibling.style.textDecoration = 'line-through'),
-        (tasks[markIndex].completed = false))
+        (tasks[markIndex].completed = true),
+        setLocal(tasks))
       : ((eTarget.nextSibling.style.textDecoration = ''),
-        (tasks[markIndex].completed = true));
+        (tasks[markIndex].completed = false),
+        setLocal(tasks));
   };
 
   const removeTask = (eTarget) => {
@@ -80,13 +81,11 @@ const UI = (() => {
 
   const clearTask = () => {
     const checkedItems = document.querySelectorAll('.checked');
-    const [...allChecks] = checkedItems;
+    let [...allChecks] = checkedItems;
     allChecks
-      .filter((item) => {
-        item.checked === true;
-      })
-      .forEach((item) => {
-        item.parentNode.style.display = 'none';
+      .filter((c) => c.checked === true)
+      .forEach((c) => {
+        c.parentNode.style.display = 'none';
       });
   };
   return {

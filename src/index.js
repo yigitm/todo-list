@@ -14,6 +14,4 @@ addIcon.addEventListener('click', () => {
   UI.taskElement(UI.createTask());
 });
 //event to filter completed tasks
-clear.addEventListener('click', () => {
-  UI.clearTask();
-});
+clear.addEventListener('click', () => UI.clearTask());
