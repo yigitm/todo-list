@@ -16,18 +16,16 @@ addIcon.addEventListener('click', () => {
 });
 //event to filter completed tasks
 clear.addEventListener('click', () => UI.clearTask());
-
+//event to edit tasks
 taskContainer.addEventListener('click', (e) => {
   if (e.target.id === 'edit') {
     UI.editTask(e.target);
   }
 });
-
-/*
+// enter key event for adding & editing tasks
 document.addEventListener('keyup', (e) => {
-    if (e.key === 'Enter') {
-      e.preventDefault();
-      
-    }
-  });
-};*/
+  if (e.key === 'Enter') {
+    e.target.id === 'task-input';
+    e.preventDefault(), UI.taskElement(UI.createTask());
+  }
+});

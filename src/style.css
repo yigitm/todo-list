@@ -11,7 +11,7 @@ main,
 }
 
 main {
-  width: 75%;
+  width: 80%;
   margin: 5rem auto;
   flex-direction: column;
   border: 1px solid grey;
@@ -31,9 +31,6 @@ input {
   border-radius: 0.5em;
 }
 
-.task-container {
-}
-
 .arrow {
   position: relative;
   z-index: 2;
@@ -50,7 +47,12 @@ input {
 .task-wrapper {
   margin-top: 1em;
   display: flex;
-  //justify-content: space-evenly;
+  align-items: center;
+  justify-content: center;
+}
+
+.task-wrapper > input {
+  margin-right: 2em;
 }
 
 #clear {
@@ -62,11 +64,13 @@ input {
 }
 
 textarea {
+  width: 50%;
+  height: 2em;
+  margin-top: 0.6em;
   border: 0;
   outline: none;
   resize: none;
-  width: 79%;
-  height: 1em;
+  line-break: unset;
 }
 
 textarea:focus {
