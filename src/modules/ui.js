@@ -27,6 +27,7 @@ const UI = (() => {
     const taskContainer = document.getElementById('task-container');
     // Single task parent
     const taskWrapper = document.createElement('div');
+    taskWrapper.classList.add('task-wrapper');
     taskWrapper.setAttribute('id', `${task.index}`);
     // create checkbox & its event
     const checkbox = document.createElement('input');

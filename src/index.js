@@ -22,3 +22,12 @@ taskContainer.addEventListener('click', (e) => {
     UI.editTask(e.target);
   }
 });
+
+/*
+document.addEventListener('keyup', (e) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      
+    }
+  });
+};*/
