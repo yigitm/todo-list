@@ -22,10 +22,10 @@ taskContainer.addEventListener('click', (e) => {
     UI.editTask(e.target);
   }
 });
-// enter key event for adding & editing tasks
+// enter key event for adding tasks
 document.addEventListener('keyup', (e) => {
   if (e.key === 'Enter') {
-    e.target.id === 'task-input';
-    e.preventDefault(), UI.taskElement(UI.createTask());
+    e.preventDefault();
+    UI.taskElement(UI.createTask());
   }
 });
