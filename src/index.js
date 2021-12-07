@@ -3,6 +3,7 @@ import UI from './modules/ui';
 
 const addIcon = document.getElementById('create-task');
 const clear = document.getElementById('clear');
+const taskContainer = document.getElementById('task-container');
 
 //show local stroge items
 document.addEventListener('DOMContentLoaded', () => {
@@ -15,3 +16,9 @@ addIcon.addEventListener('click', () => {
 });
 //event to filter completed tasks
 clear.addEventListener('click', () => UI.clearTask());
+
+taskContainer.addEventListener('click', (e) => {
+  if (e.target.id === 'edit') {
+    UI.editTask(e.target);
+  }
+});

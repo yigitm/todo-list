@@ -1,7 +1,5 @@
 const UI = (() => {
   let tasks = [];
-  const taskContainer = document.getElementById('task-container');
-  const inputField = document.getElementById('task-input');
 
   const getLocal = () => {
     const localData = JSON.parse(localStorage.getItem('Tasks'));
@@ -13,6 +11,8 @@ const UI = (() => {
   };
 
   const createTask = () => {
+    const inputField = document.getElementById('task-input');
+
     let task = {
       description: inputField.value,
       completed: false,
@@ -24,6 +24,7 @@ const UI = (() => {
   };
 
   const taskElement = (task) => {
+    const taskContainer = document.getElementById('task-container');
     // Single task parent
     const taskWrapper = document.createElement('div');
     taskWrapper.setAttribute('id', `${task.index}`);
@@ -40,7 +41,7 @@ const UI = (() => {
     const iconClass = ['far', 'fa-trash-alt', 'fa-1x'];
     const delIcon = document.createElement('i');
     delIcon.classList.add(...iconClass);
-    delIcon.addEventListener('click', (e) => UI.removeTask(e.target));
+    delIcon.addEventListener('click', (e) => removeTask(e.target));
     //Add items to task Container
     taskWrapper.append(checkbox);
     taskWrapper.append(textArea);
@@ -63,7 +64,6 @@ const UI = (() => {
 
   const checkCompleted = (task) => {
     let cBox = document.getElementById(task.index).firstChild;
-    console.log(cBox);
     task.completed
       ? ((cBox.nextSibling.style.textDecoration = 'line-through'),
         (cBox.checked = true))
@@ -99,13 +99,20 @@ const UI = (() => {
       });
   };
 
+  const editTask = (eTarget) => {
+    const editIndex = indexFinder(eTarget.parentNode.id);
+
+    eTarget.addEventListener('change', (e) => {
+      tasks[editIndex].description = e.target.value;
+      setLocal(tasks);
+    });
+  };
+
   return {
-    tasks,
     taskElement,
     createTask,
     showTasks,
-    markTask,
-    removeTask,
+    editTask,
     clearTask,
   };
 })();
