@@ -1,0 +1,87 @@
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+main,
+.todo-head {
+  display: flex;
+  align-items: center;
+}
+
+main {
+  width: 80%;
+  margin: 5rem auto;
+  flex-direction: column;
+  border: 1px solid grey;
+  border-radius: 0.5em;
+}
+
+input {
+  margin-left: 2em;
+  padding: 1em;
+}
+
+main,
+.task-container,
+textarea,
+input {
+  border: 1px solid grey;
+  border-radius: 0.5em;
+}
+
+.arrow {
+  position: relative;
+  z-index: 2;
+  top: 0.25em;
+  right: 1.4em;
+}
+
+.todo-head {
+  width: 100%;
+  justify-content: space-around;
+  flex-direction: row;
+}
+
+.task-wrapper {
+  margin-top: 1em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.task-wrapper > input {
+  margin-right: 2em;
+}
+
+#clear {
+  color: rgb(109, 99, 99);
+}
+
+#task-input {
+  width: 58vw;
+}
+
+textarea {
+  width: 50%;
+  height: 2em;
+  margin-top: 0.6em;
+  border: 0;
+  outline: none;
+  resize: none;
+  line-break: unset;
+}
+
+textarea:focus {
+  border-radius: 0.5em;
+  background-color: bisque;
+}
+
+#clear,
+.arrow,
+.far,
+.check-box,
+.checked {
+  cursor: pointer;
+}
